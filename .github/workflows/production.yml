@@ -62,7 +62,11 @@ jobs:
           platforms: linux/amd64,linux/arm64 # Multi-platform support
           cache-from: type=registry,ref=amashaal99/devops_demo:cache
           cache-to: type=inline,mode=max
-          
+      
+      - name: Authenticate Trivy
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u mashal99 --password-stdin
+
+
       - name: Scan the Docker image
         uses: aquasecurity/trivy-action@master
         with:
